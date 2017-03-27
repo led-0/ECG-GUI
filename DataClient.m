@@ -8,10 +8,12 @@ classdef DataClient<handle
         ipAddress;
         sampleRate;
         updateInterval;
+        fileName;
     end
     
     methods
-        function obj=DataClient(ipAddress, serverPort, sampleRate, bufferSize,updateInterval)
+        function obj=DataClient(UserName, ipAddress, serverPort, sampleRate, bufferSize,updateInterval)
+            obj.fileName=UserName+'.txt';
             obj.updateInterval=updateInterval;
             obj.serverPort = serverPort;
             obj.ipAddress = ipAddress;
