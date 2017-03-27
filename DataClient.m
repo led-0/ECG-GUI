@@ -26,7 +26,7 @@ classdef DataClient<handle
             end
             obj.TCPIP.BytesAvailableFcnCount = 4 * updatePoints;
             obj.TCPIP.BytesAvailableFcnMode = 'byte';
-            obj.TCPIP.BytesAvailableFcn = {@GET_DATA, bufferSize*obj.sampleRate};
+            obj.TCPIP.BytesAvailableFcn = {@GET_DATA, bufferSize*obj.sampleRate,fileName};
             obj.TCPIP.InputBufferSize = obj.TCPIP.BytesAvailableFcnCount * 10;
             obj.TCPIP.ByteOrder = 'littleEndian';
         end
