@@ -1,4 +1,4 @@
-close; clear all; 
+close all; clear all; 
 %% Create data client object
 ipAddress = 'localhost'; % Data server IP address
 serverPort = 55000; % Data server port%MCU will also send data to this port
