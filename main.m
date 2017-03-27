@@ -5,7 +5,7 @@ serverPort = 55000; % Data server port%MCU will also send data to this port
 sampleRate = 250; % Sampling rate
 updateInterval = 0.04;
 bufferSize = 2; % Data buffer size, in seconds
-dataClient = DataClient(ipAddress, serverPort, sampleRate, bufferSize,updateInterval); % Create client object
+dataClient = DataClient('User1',ipAddress, serverPort, sampleRate, bufferSize,updateInterval); % Create client object
 dataClient.Open;
 data = dataClient.GetBufferData; % Get data from buffer
 %% Process Data
