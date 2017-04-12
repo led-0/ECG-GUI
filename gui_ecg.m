@@ -29,7 +29,7 @@ function varargout = gui_ecg(varargin)
 global dataClient;
 dataClient = DataClient('localhost',55000,200,5,0.04); % Create client object
 global t;
-t = timer('StartDelay',1,'TimerFcn',@t_TimerFcn,'Period',0.05,'ExecutionMode','fixedRate'); %ÉèÖÃperiod×÷ÎªÖÜÆÚ
+t = timer('StartDelay',1,'TimerFcn',@t_TimerFcn,'Period',0.05,'ExecutionMode','fixedRate'); %è®¾ç½®periodä½œä¸ºå‘¨æœŸ
 
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
@@ -90,13 +90,13 @@ global dataClient;
 global t;
 dataClient.Open;
 pause(2);
-handles.y=dataClient.GetRawData;%¶ÁÊı×é
+handles.y=dataClient.GetRawData;%è¯»æ•°ç»„
 handles.z=dataClient.GetRwave;
 line(1)=plot(handles.y); hold on
 line(2)=scatter(handles.z,handles.y(handles.z)); hold off
 set(line(2),'marker','o');
 handles.line=line;
-start(t);%start°´Å¥ ´ò¿ª¼ÆÊ±Æ÷
+start(t);%startæŒ‰é’® æ‰“å¼€è®¡æ—¶å™¨
 guidata(hObject, handles);
 
 % --- Executes on button press in pushbutton2.
@@ -108,14 +108,14 @@ global t;
 % handles    structure with handles and user data (see GUIDATA)
 dataClient.Close;
 stop(t);
-%stop°´Å¥ stop(t); Í£Ö¹¼ÆÊ±Æ÷
+%stopæŒ‰é’® stop(t); åœæ­¢è®¡æ—¶å™¨
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% ÌùÉÏÄãµÄconnect¶ÔÓ¦µÄº¯Êı´úÂë
+% è´´ä¸Šä½ çš„connectå¯¹åº”çš„å‡½æ•°ä»£ç 
 
 % --- Executes during object creation, after setting all properties.
 function text3_CreateFcn(hObject, eventdata, handles)
@@ -124,7 +124,7 @@ global dataClient;
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 handles.rate = dataClient.GetHR;
-set(hObject,'string',handles.rate);%ÏÔÊ¾ĞÄÂÊ
+set(hObject,'string',handles.rate);%æ˜¾ç¤ºå¿ƒç‡
 guidata(hObject,handles);
 
 
@@ -156,12 +156,14 @@ end
 
 function t_TimerFcn(hobject,eventdata)
 global dataClient;
-handles.y=dataClient.GetRawData;%¶ÁÊı×é
+handles.rate = dataClient.GetHR;
+set(handles.text3,'string',handles.rate);%æ˜¾ç¤ºå¿ƒç‡
+handles.y=dataClient.GetRawData;%è¯»æ•°ç»„
 handles.z=dataClient.GetRwave;
 set(handles.line(1),'YData',handles.y);
 set(handles.line(2),'XData',handles.z,'YData',handles.y(handles.z))
 drawnow;
-%¸üĞÂfigureÀïµÄxÊı¾İ
+%æ›´æ–°figureé‡Œçš„xæ•°æ®
 guidata(hObject, handles);
 
 
@@ -171,4 +173,4 @@ global dataClient;
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-dataClient.HRV;% µ÷³öHRV·ÖÎöµÄ½çÃæ
+dataClient.HRV;% è°ƒå‡ºHRVåˆ†æçš„ç•Œé¢
